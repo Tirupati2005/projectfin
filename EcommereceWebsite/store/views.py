@@ -139,10 +139,8 @@ def edit_product(request,id):
 def delete_product(request, id):
     product = get_object_or_404(Product, id=id)
     if request.method == 'POST':
-        # If it's a POST request, delete the product
         product.delete()
         return redirect('product_list')
-    # If it's not a POST request, you may choose to render a confirmation page or redirect
     return render(request, 'store/delete_product.html', {'product': product})
 
 
