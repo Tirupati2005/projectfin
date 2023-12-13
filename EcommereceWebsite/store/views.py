@@ -130,6 +130,7 @@ def edit_product(request,id):
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
+            messages.success(request,("Edited Product successfully...!"))
             return redirect('product_list')
     else:
         form = ProductForm(instance=product)
@@ -140,6 +141,7 @@ def delete_product(request, id):
     product = get_object_or_404(Product, id=id)
     if request.method == 'POST':
         product.delete()
+        messages.success(request,("Deleted Product successfully...!"))
         return redirect('product_list')
     return render(request, 'store/delete_product.html', {'product': product})
 
