@@ -15,7 +15,6 @@ from .models import Order,Customer
 #from store.middlewares.auth import auth_middleware
 
 
-
 def home(request):
     try:
     
@@ -36,9 +35,7 @@ def home(request):
                     price=product_data['price'],
                     category=category_instance,
                     description=product_data['description'],
-                    title=product_data['title'],
-
-                    
+                    title=product_data['title'],                 
                 )
 
                 product_instance.save()
@@ -94,8 +91,6 @@ def signup(request):
 
 
 
-
-
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'store/product_list.html', {'products': products})
@@ -116,14 +111,7 @@ def add_product(request):
         form = ProductForm()
     return render(request, 'store/add_product.html', {'form': form})
 
-
-
-
-
-
-
-
-
+@login_required
 def edit_product(request,id):
     product = get_object_or_404(Product,id=id)
     if request.method == 'POST':
@@ -136,7 +124,7 @@ def edit_product(request,id):
         form = ProductForm(instance=product)
     return render(request, 'store/edit_product.html', {'form': form})
 
-
+@login_required
 def delete_product(request, id):
     product = get_object_or_404(Product, id=id)
     if request.method == 'POST':
@@ -144,13 +132,6 @@ def delete_product(request, id):
         messages.success(request,("Deleted Product successfully...!"))
         return redirect('product_list')
     return render(request, 'store/delete_product.html', {'product': product})
-
-
-
-
-
-
-
 
 
 @login_required
