@@ -1,0 +1,47 @@
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<header class="bg-dark py-4">
+    <div class="container px-4 px-lg-5 my-4">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Delete Product...</h1>
+            <p class="lead fw-normal text-white-50 mb-0">here is delete page...!</p>
+        </div>
+    </div>
+  </header>
+
+
+        <div class="container d-flex justify-content-center mt-5">
+            <div class="container d-flex justify-content-center mt-5">
+             <center>
+
+
+
+                <p>Are you sure you want to delete "{{ product.name }}"?</p>
+                
+                <form method="post" class="product-form">
+                    {% csrf_token %}
+                    <button type="submit">Yes, delete</button>
+                    <a href="{% url 'product_list' %}">Cancel</a>
+                </form>
+ 
+
+
+             </center>
+
+            </div>
+        </div>
+        <br/><br/>
+        <br/><br/>
+        <br/><br/>         
+
+  
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "store/base.html"%}
+
+{% load static%}
+
+{% block title%}
+
+<link rel="stylesheet" href="{% static 'css/style1.css' %}">
+<link rel="stylesheet" href="{% static 'css/style2.css' %}">
+
+
+{% endblock%}
+
+{% block content%}
+
+
+
+<header class="bg-dark py-4">
+  <div class="container px-4 px-lg-5 my-4">
+      <div class="text-center text-white">
+          <h1 class="display-4 fw-bolder">Action page...</h1>
+          <p class="lead fw-normal text-white-50 mb-0">here editing and deleting products action involved...!</p>
+      </div>
+  </div>
+</header>
+
+
+
+{% if products %}
+<ul>
+    {% for product in products %}
+    
+        <li>
+            <p>ID: <a href="/edit/{{product.id}}">{{product.id}}</a></p>
+            <p>Name: {{product.title}}</p>
+            <p>Category: {{ product.category }}</p>
+            <p>Price: ${{ product.price }}</p>
+            <p>Description: {{ product.description }}</p>
+        </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="error-message">No products available.</p>
+{% endif %}
+
+{% if error_message %}
+<p class="error-message">Error: {{ error_message }}</p>
+{% endif %}
+
+
+
+{% endblock%}
