@@ -1,1 +1,49 @@
+{% extends "store/base.html"%}
 
+{% load static%}
+
+{% block title%}
+
+{% endblock%}
+
+{% block content%}
+
+<header class="bg-dark py-4">
+    <div class="container px-4 px-lg-5 my-4">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Your Orders...</h1>
+            <p class="lead fw-normal text-white-50 mb-0">welcome To order page...!</p>
+        </div>
+    </div>
+</header>
+<br><br><br>
+
+<table class="table table-hover">
+    <hr>
+    <thead>
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Date</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    {% for order_instance in order_instances %}
+    <tbody>
+      <tr>
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{order_instance.product}}</td>
+        <td>{{order_instance.quantity}}</td>
+        <td>{{order_instance.date}}</td>
+        <td>{{order_instance.status}}</td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+  
+  <br><br><br>
+  <br><br><br>
+  <br><br><br>
+
+{% endblock%}
