@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Product Popularity Visualization</title>
-</head>
-<body>
-    <h1>Product Popularity Visualization</h1>
-    <img src="{{ image }}" alt="Product Popularity" />
-</body>
-</html>
+{% extends "store/base.html" %}
+
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<header class="bg-dark py-4">
+    <div class="container px-4 px-lg-5 my-4">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Product  Sale Visualization</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Product Popularity.....</p>
+        </div>
+    </div>
+  </header>
+
+
+        <div class="container d-flex justify-content-center mt-5">
+            <div class="container d-flex justify-content-center mt-5">
+             <center>
+
+                <img src="{{ image }}" alt="Product Popularity" />
+
+             </center>
+
+            </div>
+        </div>
+        <br/><br/>
+        <br/><br/>
+        <br/><br/>         
+
+  
+{% endblock %}
+
