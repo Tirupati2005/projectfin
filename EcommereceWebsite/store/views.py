@@ -140,6 +140,12 @@ def order_product(request):
         form = OrderForm()
     return render(request, 'store/order.html', {'form': form})
 
+@login_required
+def view_orders(request,user):
+    user = request.user
+    order_instances = Order.objects.filter(user=user)
+    return render(request,'store/view_order.html',{'order_instances':order_instances})
+
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
