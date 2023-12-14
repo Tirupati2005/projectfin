@@ -16,7 +16,7 @@ urlpatterns = [
     path('delete/<int:id>/', views.delete_product, name='delete'),
     path('order', views.order_product, name='order'),
     path('view_orders/', views.view_orders, name='view_orders'),
-    path('product_popularity/', views2.visual_representation_product_popularity, name='product_popularity'),
+    path('product_popularity/', views2.visual_representation, name='product_popularity'),
     path('products_api/', ProductListCreateAPIView.as_view(), name='products_api'),
     path('orders_api/', OrderListCreateAPIView.as_view(), name='orders_api'),
 ]
