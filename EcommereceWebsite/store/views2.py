@@ -5,7 +5,7 @@ from .models import Product, Order
 import io
 import base64
 
-def visual_representation_product_popularity(request):
+def visual_representation(request):
 
     products = Product.objects.all()
     order_count = []
