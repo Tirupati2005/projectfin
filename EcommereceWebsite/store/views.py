@@ -141,7 +141,7 @@ def order_product(request):
     return render(request, 'store/order.html', {'form': form})
 
 @login_required
-def view_orders(request,user):
+def view_orders(request):
     user = request.user
     order_instances = Order.objects.filter(user=user)
     return render(request,'store/view_order.html',{'order_instances':order_instances})
