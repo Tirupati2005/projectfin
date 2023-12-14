@@ -12,6 +12,8 @@ from django import forms
 from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 from .models import Order,Customer
+from rest_framework import generics
+from .serializers import ProductSerializer, OrderSerializer
 #from store.middlewares.auth import auth_middleware
 
 
@@ -26,28 +28,17 @@ def home(request):
 
         for product_data in products_data:
                
-                category_name = product_data['category']
-                category_instance, _ = Category.objects.get_or_create(name=category_name)
+            category_name = product_data['category']
+            category_instance, _ = Category.objects.get_or_create(name=category_name)
 
-
-                product_instance = Product(
-                    name=product_data['title'],
-                    price=product_data['price'],
-                    category=category_instance,
-                    description=product_data['description'],
-                    title=product_data['title'],                 
-                )
-
-                product_instance.save()
+            product_instance = Product(name=product_data['title'],price=product_data['price'],category=category_instance,description=product_data['description'],title=product_data['title'],)
+            product_instance.save()
         return render(request, 'store/upload.html', {'products_data': products_data})
 
-    
     except requests.RequestException as e:
         
         error_message = f"Failed to fetch data from API: {e}"
         return render(request, 'store/upload.html', {'error_message': error_message})
-
-
 
 
 def login_user(request): 
@@ -90,7 +81,6 @@ def signup(request):
         return render(request,'store/signup.html', {'form':form})
 
 
-
 def product_list(request):
     products = Product.objects.all()
     return render(request, 'store/product_list.html', {'products': products})
@@ -111,6 +101,7 @@ def add_product(request):
         form = ProductForm()
     return render(request, 'store/add_product.html', {'form': form})
 
+
 @login_required
 def edit_product(request,id):
     product = get_object_or_404(Product,id=id)
@@ -119,7 +110,7 @@ def edit_product(request,id):
         if form.is_valid():
             form.save()
             messages.success(request,("Edited Product successfully...!"))
-            return redirect('product_list')
+            return redirect('home')
     else:
         form = ProductForm(instance=product)
     return render(request, 'store/edit_product.html', {'form': form})
@@ -130,7 +121,7 @@ def delete_product(request, id):
     if request.method == 'POST':
         product.delete()
         messages.success(request,("Deleted Product successfully...!"))
-        return redirect('product_list')
+        return redirect('home')
     return render(request, 'store/delete_product.html', {'product': product})
 
 
@@ -148,6 +139,17 @@ def order_product(request):
     else:
         form = OrderForm()
     return render(request, 'store/order.html', {'form': form})
+
+
+class ProductListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+
+class OrderListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+
 
 
 def basepage(request):
