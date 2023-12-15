@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import datetime
 
 class Category(models.Model):
@@ -39,7 +40,7 @@ class ProductImage(models.Model):
 
 class Order(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
-    customer=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    user=models.ForeignKey(User,on_delete=models.CASCADE,default=1)
     quantity=models.IntegerField(default=1)
     address=models.CharField(max_length=150,default='',blank=True)
     phone=models.CharField(max_length=20,default='',blank=True)
